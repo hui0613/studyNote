@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <p id="app">{{fullname1}}</p>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+    <script>
+        const app = new Vue({
+            el: '#app',
+            data: {
+                firstname: '123',
+                lastname: '212'
+            },
+            computed: {
+                //在computed中定义的并不是方法而是属性，每个属性都有自己的 get 和 set 方法，
+                //一般情况下，不需要实现set 方法，只需要实现get方法
+                //在实现set方法时，需要传递一个参数
+                fullname: {
+                    get() {
+                        return this.firstname + " " + this.lastname
+                    }
+                },
+                /*因为不需要实现set方法，因此属性可以简写成方法的形式，在调用属性时 
+                不需要写（）*/
+
+                /*
+                在多次使用计算属性时，如果计算属性中所使用的数据没有发生改变
+                则计算属性只会调用一次，这是因为计算属性会将计算结果进行缓存，数据没有发生改变时，会直接将缓存的结果返回
+                这样使得性能有所提高
+                而在methods中定义的方法，每次使用时都会重新执行一遍
+
+                */
+                fullname1: function() {
+                    return this.firstname + " " + this.lastname
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

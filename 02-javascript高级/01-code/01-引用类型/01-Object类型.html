@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Object类型</title>
+</head>
+
+<body>
+    <script>
+        /***
+         * 我们常见的引用类型值都是 Object 的实例
+         * 创建 Object  实例的方式有两种：
+         * 1.使用 new 关键字
+         * 2.使用对象字面量
+         */
+
+        //使用 new 关键字创建对象
+        var person1 = new Object();
+        person1.name = "hui";
+        person1.age = 22;
+
+        // 使用对象字面量创建对象
+        /**
+         * 使用对象字面量创建对象是，在最后一个属性后面不能使用 逗号，否在在 IE7及之前的版本和Oepera中不导致错误
+         * 属性名可以使用字符串形式
+         * 在使用对象字面量创建对象是，实际上并不会调用 Object 构造函数
+         */
+        var person2 = {
+            name: "hui",
+            age: 22
+        }
+
+        /**
+         * 对象字面量的形式通常用于向函数传递大量的参数，在函数内部使用 typeof 来判断属性是否存在，然后作出相应的操作
+         * 
+         * 在访问对象的属性是，可以使用 . 操作符来访问，也可以使用 [] 的形式来访问
+         * 使用 [] 访问对象属性是，将需要访问的属性名称一字符串的形式放在 [] 中
+         * 另外， [] 中可以使用变量来访问对象的属性
+         * 若对象的属性中含有会导致语法错误的字符，或者属性名使用了关键字或者保留子，应该使用 [] 类访问属性；
+         */
+
+        console.log(person2.name);
+
+        console.log(person2["name"]);
+
+        let name = "name";
+        console.log(person2[name]);
+    </script>
+</body>
+
+</html>

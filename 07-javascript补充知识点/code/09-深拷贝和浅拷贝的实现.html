@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+
+        var person = {
+            name: "zs",
+            age: 12,
+            score: {
+                en: 23,
+                py: 75
+            }
+        }
+        /*
+        浅拷贝：将一个对象的属性值复制给另一个对象，
+        浅拷贝中若属性值不是引用类型仅仅时基本数据类型，则创建副本赋值给新对象，两者户部影响
+        若为引用类型则会相互引用，因为他们引用的是同一个对象
+
+        */
+
+        function shallowCopy(object) {
+            if (!object || typeof object != "object") {
+                return
+            }
+            // 根据对象的类型判断时新建数组还是对象
+            let newObj = Array.isArray(object) ? [] : {}
+            for (let key in object) {
+                //判断时 object 的特有属性才进行复制
+                if (object.hasOwnProperty(key)) {
+                    newObj[key] = object[key]
+                }
+            }
+            return newObj
+        }
+
+        // var person1 = shallowCopy(person)
+        // console.log(person1)
+        // person1.name = "李四"
+        // person1.score.py = 12
+        // console.log(person1)
+        // console.log(person)
+
+        /*
+        深拷贝在遇到属性值为引用类型时，会进行深度遍历，（递归）
+        */
+
+        function deepCopy(object) {
+            if (!object || typeof object != "object") {
+                return
+            }
+            // 根据对象的类型判断时新建数组还是对象
+            let newObj = Array.isArray(object) ? [] : {}
+
+            for (let key in object) {
+                if (object.hasOwnProperty(key)) {
+                    newObj[key] = typeof object[key] === 'object' ? arguments.callee(object[key]) : object[key]
+                }
+            }
+            return newObj
+        }
+
+        var person2 = deepCopy(person)
+        console.log(person2)
+        person2.score.py = 34
+        console.log(person2)
+        console.log(person)
+    </script>
+</body>
+
+</html>

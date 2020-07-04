@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>立即执行函数</title>
+  </head>
+  <body>
+    <script>
+      /**
+       * 立即执行函数  （IIFE）
+       * 立即执行函数也可以传递参数
+       *
+       * 立即执行函数执行完成之后立即被销毁
+       *
+       * 执行符号 --- () 只能执行 表达式，不能执行函数声明
+       *
+       * 将函数声明变成表达式：在函数声明之前添加 + - ! && || 或者使用 () 包裹函数体
+       *
+       * 将函数变成表达式之后函数名基本没有意义
+       *
+       */
+
+      (function () {
+        //    执行代码
+      })(); // w3c 建议写法
+
+      (function () {
+        var a = 1,
+          b = 2;
+        console.log(a + b);
+      })();
+
+      // 立即执行函数接受参数
+      (function (a, b) {
+        console.log(a + b);
+      })(1, 2);
+
+      //   立即执行函数返回值
+      var num = (function () {
+        return 1;
+      })();
+      console.log(num);
+
+      //   验证立即函数执行完成之后被销毁
+      var test = (function () {
+        console.log("函数执行完成之后被销毁");
+      })();
+      console.log(test); // undefined
+
+      /**
+       * function (a){ console.log(a) }(6);
+       * 在这个例子中，若后面的执行符号中没有传递参数，则会抛出错误
+       * 但是传递参数之后，js 引擎会将 (6) 解析成一个表达式，与前面的函数进行分离，这时候的函数并不是立即执行函数
+       */
+    </script>
+  </body>
+</html>

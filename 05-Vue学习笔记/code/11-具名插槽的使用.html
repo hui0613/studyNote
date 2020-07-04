@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!---当一个组件定义了多个插槽时，若需要使用特定的某一个插槽，则需要给插槽添加 name 属性-->
+
+    <div id="app">
+        <!--在使用特定的某一个插槽时，需要指定其 name，语法如下；
+            若没有指定 slot 的 name 则会使用组件中没有定义 name 的插槽（若没有则不显示）-->
+        <cpn><button slot="left">按钮</button></cpn>
+
+        <cpn><button>这是没有指定 插槽的</button></cpn>
+    </div>
+
+
+    <template id="cpn">
+        <div>
+            <div>子组件</div>
+            <slot name="left"><span>left</span></slot>
+            <slot name="center"><span>center</span></slot>
+            <slot name="right"><span>right</span></slot>
+
+            <slot></slot>
+        </div>
+    </template>
+    <script src="../../vue.js"></script>
+
+    <script>
+        const app = new Vue({
+            el: "#app",
+            components: {
+                cpn: {
+                    template: "#cpn"
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

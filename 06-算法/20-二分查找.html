@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>二分查找</title>
+</head>
+
+<body>
+    <!-- 二分查找的条件是必须是有序的线性表 
+        和线性表的中点值比较，如果小就在线性表左边查找，否则在右边查找，
+        如此递归直到找到相同的值，返回索引，若没有则返回 -1
+    -->
+    <script>
+        function binarySearch(data, arr, start, end) {
+            if (start > end) {
+                return -1;
+            }
+            var mid = Math.floor((start + end) / 2);
+            if (data == arr[mid]) {
+                alert(mid)
+                return mid;
+            } else if (data < arr[mid]) {
+                binarySearch(data, arr, start, mid - 1);
+            } else {
+                binarySearch(data, arr, mid + 1, end);
+            }
+            // return mid
+        }
+
+        var arr = [1, 2, 3, 4, 5, 6, 7]
+        alert(binarySearch(2, arr, 0, arr.length - 1))
+    </script>
+</body>
+
+</html>

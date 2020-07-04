@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /*
+        * 函数防抖：在时间被触发 n 秒后在执行回调函数，如果在这 n 秒内又被触发，则重新计时
+        * 应用：阻止表单重复提交
+                        对于输入框连续输入进行 ajax 验证时，使用函数防抖可以减少请求次数
+                        判断页面是否滑动到页面底部
+
+            实现： 利用闭包
+        */
+
+        function debounce(fn, wait) {
+            // 储存计时器
+            var timer = null
+
+            return function () {
+                var _that = this
+                var args = arguments
+                if (timer) {
+                    // 已经存在计时器，即上一次时间触发还没有执行，再次触发时清除计时器重新计时
+                    clearTimeout(timer)
+                    timer = null
+                }
+                // 设置定时器，在 wait 时间后执行回调函数
+                timer = setTimeout(function () {
+                    fn.apply(_that, args)
+                }, wait)
+            }
+        }
+
+        // var fn = function () {
+        //     console.log("Demo")
+        // }
+
+        // setInterval(debounce(fn, 500), 1000) // 第一次触发在 1500 ms 时，之后每 1000 ms 执行一次
+        // setInterval(debounce(fn,2000),1000); // 不会触发一次，在的等待时间再次被触发，则重新计时
+
+
+
+        /*
+        函数节流：规定一个时间段内，只能一次的事件的回调函数被之行，如果在同一个单位时间内被触发多次，则只有一次被执行
+        应用：
+                    游戏中的刷新率
+                    DOM 元素拖拽
+                    Canvas画笔功能
+        */
+
+        function throttle(fn, gapTime) {
+            let _lastTime = null
+            return function () {
+                let _nowTime = + new Date()
+                if (_nowTime - _lastTime > gapTime || !_lastTime) {
+                    fn()
+                    _lastTime = _nowTime
+                }
+            }
+        }
+
+        function fn() {
+            console.log("throttle")
+        }
+
+        setInterval(throttle(fn, 1000), 10)
+
+    </script>
+</body>
+
+</html>

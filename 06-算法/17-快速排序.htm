@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>快速排序</title>
+</head>
+
+<body>
+    <!-- 快速排序：
+        通过一次排序，将需要进行排序的元素分成两部分，左边的元素比右边的所有元素都要小
+        再按这种方法对左右两边的元素进行排序，使整个数组变得有序
+
+        实现步骤：
+         1. 选择一个基准元素 target（一般选择第一个元素）
+         2.将比基准元素小的元素移动到数组左边，比基准元素大的移动到数组右边
+         3.分别对 基准元素左右两边重复上述两个步骤
+
+        快速排序在一定程度上使用了 分治思想（将问题转换成一个一个小问题来递归求解）
+     -->
+    <script>
+        /* 第一种写法---不推荐，占用较多的空间
+        开辟两个数组空间 left 和 right，分别存储基准元素左右两边的元素
+        每次递归后返回 left 和 right 以及基准元素拼接成的数组
+        */
+        // function quickSort(arr) {
+        //     if (arr.length < 2) {
+        //         return arr
+        //     }
+        //     const target = arr[0]
+        //     const left = [];
+        //     const right = [];
+        //     for (let i = 1; i < arr.length; i++) {
+        //         if (arr[i] < target) {
+        //             left.push(arr[i])
+        //         } else {
+        //             /*
+        //             将大于等于基准元素的元素添加到 right 数组中，这个时候，
+        //             若元素等于基准元素且该元素原本的闻之在基准元素左边且相连，
+        //             也会被添加到 right 数组中，这就是造成快速排序不稳定的原因
+        //             */
+        //             right.push(arr[i])
+        //         }
+        //     }
+        //     //递归快速排序
+        //     return quickSort(left).concat(target, quickSort(right))
+        // }
+
+
+        /**第二中写法，不需要额外的储存
+         * 
+         * 在数组中记录一个索引 l 从数组的最左边开始，索引 r 从数组的最右边开始
+         *  l < r 时：找到右侧小于 target 的值，并将其赋值到 arr[l]
+         * l<r 时：找到左侧大于target的值，并将其赋值到 arr[r]
+         *
+
+         *相比于其他排序算法，快速排序使用的较多，在相同数量的数据情况下，运行效率
+         较高，且所需的而外空间较少
+        */
+
+        function quickSort(arr, start, end) {
+            if (end - start < 1) {
+                return
+            }
+            const target = arr[start];
+            let l = start,
+                r = end;
+            while (l < r) {
+                while (l < r && arr[r] >= target) {
+                    r--;
+                }
+                arr[l] = arr[r]
+                while (l < r && arr[l] < target) {
+                    l++;
+                }
+                arr[r] = arr[l];
+            }
+            arr[l] = target;
+            quickSort(arr, start, r - 1)
+            quickSort(arr, l + 1, end)
+            return arr
+        }
+
+
+        let arr = [67, 421, 6, 2, 7]
+        alert(quickSort(arr, 0, arr.length - 1))
+    </script>
+</body>
+
+</html>

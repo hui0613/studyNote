@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>map和set</title>
+</head>
+
+<body>
+	<!-- map 和 Object的区别：
+		1.Object的键值只能是字符串或者Symbol；Map的可以是任意值
+		2.Map中的键值是有序的(FIFO原则)
+		3.Map中键值的个数可以使用 size 获取
+		4.Object都有自己的原型，自定义的键可能和原型中的冲突
+	 -->
+	<script>
+		var myMap = new Map();
+		var keyStr = "a key";
+		myMap.set(keyStr, "this is a demo");
+		alert(myMap.get(keyStr))
+
+		// 对 Map 进行遍历
+		/*
+		for(var (key,value) of myMap){
+
+		}
+
+
+		使用entries()、keys()、values()方法会按插入顺序返回新的迭代器对象，
+		包含了map对象中每个元素的键
+		for(var (key,value) of myMap.entries()){
+
+		}
+
+		for(var key of myMap.keys()){
+
+		}
+
+		for(var key of myMap.values()){
+
+		}
+
+		myMap.forEach(function(key,value){},myMap)
+
+		*/
+
+		// Map 对象的操作
+		/*
+		Map与Array之间的转换,Map构造函数可以将一个二维数组转换成Map对象
+		*/
+		var keyArray = [["key1", "value1"], ["key2", "value2"]];
+		var myMap2 = new Map(keyArray)
+
+		// 使用 Array.from() 函数可以将一个 Map 对象转换成一个二维数组
+		var arr = Array.from(myMap2)
+
+		//Map 的克隆，克隆出来的Map对象与原对象不相等
+
+		var myMap3 = new Map(myMap2)
+
+		// Map合并，合并两个对象时，如果有相同的键，则后面的会覆盖前面的
+		var myMap4 = new Map([...myMap, ...myMap2])
+
+
+		// Set 对象允存任何值，储存的值总是唯一的
+		/*
+		+0和-0相等
+		underfind和underfind相等
+		Nan和Nan不恒等，但是只能储存一个
+
+		在储存对象时，存在对象引用不同，即使值相等也可以储存
+		*/
+
+		var mySet = new Set();
+		mySet.add(1)
+
+		//Set和Arrat类型转化
+		var mySet1 = new Set([1, 2, 3, 4, 5])
+
+		//数组去重
+		var mySet2 = new Set([1, 2, 3, 4, 2, 3, 2])
+
+		//并集
+		var set1 = new Set([1, 2, 3, 4])
+		var set2 = new Set([2, 4, 6, 7])
+		var mySet3 = new Set([...set1, ...set2])
+
+		//交集
+		var insertSect = new Set([...set1].filter(x => set2.has(x)))
+
+		//差集
+		var diffence = new Set([...set1].filter(x => !set2.has(x)))
+
+	</script>
+</body>
+
+</html>

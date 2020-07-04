@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+    <div id="app">
+        <!---需要使用v-bind 绑定数据，否则会将变量作为字符串传递给子组件-->
+        <cpn1 :values='values'></cpn1>
+    </div>
+    <template id='cpn1'>
+        <div>{{values}}</div>
+    </template>
+    <script>
+        /*  父传子通过props传值 
+                                                                                        props可以传递数组也可以传递对象
+                                                                                         */
+        const cpn1 = {
+            template: '#cpn1',
+            // props: ['values']
+            props: {
+                /*限定传入的参数类型必须为某种类型。类型设定可以包含多个，需要写成一个数组的形式
+                也可以设置默认值，类型为对象或者数组时，默认值必须时一个函数
+                */
+                values: {
+                    type: Array,
+                    default () {
+
+                    },
+                    //required设置为true时表示必须传递该参数
+                    required: true
+                }
+            }
+        }
+        const app = new Vue({
+            el: "#app",
+            data: {
+                values: [1, 2, 3, ]
+            },
+            components: {
+                cpn1
+            }
+        })
+    </script>
+</body>
+
+</html>

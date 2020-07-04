@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <!--插槽的存在时的组件拥有扩展性-->
+
+    <div id="app">
+        <!--需要使用插槽时，在组件内加上需要替换的内容,如果有多个值，则这所有的值会作为一个整体替换元素-->
+        <cpn><button>按钮</button></cpn>
+
+        <!--在没有设置插槽的值时，会使用默认值-->
+        <cpn></cpn>
+    </div>
+
+    <template id="cpn">
+
+        <div>
+            <div>子组件</div>
+
+        <!--放置一个插槽，插槽可以设置默认值，减少在多次使用同一个值时的代码冗余-->
+        <slot><span>哈哈哈</span></slot>
+        </div>
+    </template>
+
+    <script src="../../vue.js"></script>
+
+    <script>
+        const app = new Vue({
+            el: "#app",
+            components: {
+                cpn: {
+                    template: "#cpn"
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

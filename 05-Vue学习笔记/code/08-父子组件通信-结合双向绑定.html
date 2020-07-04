@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+    <div id="app">
+        <!---需要使用v-bind 绑定数据，否则会将变量作为字符串传递给子组件-->
+        <cpn :values='num'></cpn>
+    </div>
+    <template id='cpn'>
+        <div>
+            <div>{{values}}</div>
+        </div>
+    </template>
+    <script>
+        const cpn = {
+            template: '#cpn',
+            props: ["values"]
+        }
+
+        var app = new Vue({
+            el: "#app",
+            data: {
+                num: 212
+            },
+            components: {
+                cpn
+            }
+        })
+    </script>
+</body>
+
+</html>

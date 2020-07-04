@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <!-- 总结：
+        父级作用域中使用子组件中定义的数据，使用作用域插槽
+        1. 在插槽中将数据作为插槽的实行进行绑定 <slot :message = "message"><slot>
+        2. 在父级作用域中使用 slot 的属性数据 <cpn v-slot="defaultMessage">{{defaultMesage}}<cpn>
+            v-slot中定义的名称可以自定义
+     -->
+
+    <div id="app">
+        <!--直接访问 message 变量，由于作用域的问题，这里访问的是 父组件（Vue实例）中的 massage -->
+        <!-- <cpn>{{message}}</cpn> -->
+
+
+        <!--若想插槽访问子组件中的数据，需要使用作用域插槽-->
+
+        <!-- 在父级作用域中使用 slot的属性数据 -->
+        <cpn v-slot="defaultMessage">{{defaultMessage.message}}</cpn>
+    </div>
+
+    <!-- <template id="cpn">
+        <div>
+            <span>子组件</span>
+        <slot></slot>
+        </div>
+    </template> -->
+
+    <template id="cpn">
+        <div>
+            <span>子组件</span>
+            <!-- 将子组件中的数据作为 slot 的属性绑定 -->
+            <slot :message="message"></slot>
+        </div>
+    </template>
+
+    <script src="../../vue.js"></script>
+
+    <script>
+        const app = new Vue({
+                el: "#app",
+                data: {
+                    message: '这是父组件'
+                },
+                components: {
+                    cpn: {
+                        template: "#cpn",
+                        data() {
+                            return {
+                                message: "这是子组件"
+                            }
+
+                        }
+                    }
+                }
+            })
+            /*若子组件中定义了插槽，要想让插槽访问到子组件中的数据，则需要使用作用域插槽
+             */
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <div id="app">
+        <cpn></cpn>
+        <!--使用 ref 属性来 表示不同的子组件，使用 this.$refs 通过 ref 属性来访问特定的子组件-->
+        <cpn ref="aaa"></cpn>
+        <button @click="btnClick">打印子组件</button>
+    </div>
+
+    <template id="cpn">
+        <div>子组件</div>
+    </template>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+
+    <script>
+        const app = new Vue({
+            el: "#app",
+            methods: {
+                btnClick() {
+                    // 使用 this.$children 访问子组件，使用这种方法时，若父组件中包含多个子组件，不方便访问特定的某个组件（特别是在需要添加或者删除组件时）
+                    // console.log(this.$children)
+
+                    // 使用 this.$refs 访问子组件,但不包含子组件时，this.$refs 是一个空数组，
+                    console.log(this.$refs.aaa)
+                }
+            },
+            components: {
+                cpn: {
+                    template: "#cpn",
+                    methods: {
+                        cpnShow() {
+                            console.log("conShow")
+                        }
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

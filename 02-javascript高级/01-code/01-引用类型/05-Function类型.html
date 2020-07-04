@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Function</title>
+  </head>
+
+  <body>
+    <script>
+      {
+        /**
+         * 每个函数都是 Function 类型的实例， 函数实际上是一个对象，
+         * 而函数名是一个指向函数对象的指针
+         *
+         * 函数没有重载，对于重复申明的函数，后面的函数会覆盖前面的
+         *
+         * 函数申明和函数表达式的区别：
+         *  解析器会率先读取函数申明，并使该函数在任何代码执行以前都可以使用（调用）
+         *  而对于函数表达式，必须要等到解析器执行到所在行之后，才会被解释执行
+
+         */
+
+        //  可以在函数申明之前调用函数
+        var temp = add(1, 2);
+
+        function add(num1, num2) {
+          return num1 + num2;
+        }
+
+        /* 这里存在一个预编译变量提升的过程
+         * 函数表达式中的变量 进行提升，但并不会执行赋值过程，也就是说
+         * 在执行到函数表达式之前，变量 demo 没有进行初始化，其值为 undefined
+         */
+
+        // 调用函数是出错
+        console.log(demo);
+        // demo();
+
+        var demo = function () {
+          console.log("this is demo");
+        };
+      }
+
+      {
+        /**
+         * 函数可以作为参数传递给另一个函数，也可以作为另一个函数的返回值
+         */
+
+        function test() {
+          return function a() {
+            console.log("this is a function");
+          };
+        }
+
+        temp = test(); //使用临时变量 temp 接受 test 的返回值，这时候 temp 的值为 a(),可以被执行
+        temp();
+      }
+
+      {
+        /**
+         * 函数的内部属性
+         * 在函数内部有 arguments 和 this 两个特殊的对象
+         *      1. arguments ： 是一个类数组（不是数组，但是可以使用某些数组的方法）对象，包含了传入
+         *                      函数的所有参数，该对象有一个 callee 属性，该属性指向拥有 arguments
+         *                      的函数
+         */
+
+        /**  使用 arguments 的callee 属性解除函数的耦合
+         * 例如下面递归示例，函数执行紧紧的和函数名耦合在一起
+         */
+
+        function factorial(num) {
+          if (num <= 1) {
+            return 1;
+          } else {
+            return num * factorial(num - 1);
+          }
+        }
+        console.log(factorial(3));
+        /**
+         * 当将函数赋值给另一个变量，并改变原来的函数时，无法进行正确的阶乘计算
+         */
+
+        temp = factorial;
+        factorial = null;
+        // console.log(temp(3)); //报错
+
+        // 使用 arguments 对象的 callee 属性解除耦合
+
+        factorial = function (num) {
+          if (num <= 1) {
+            return 1;
+          } else {
+            return num * arguments.callee(num - 1);
+          }
+        };
+
+        temp = factorial;
+        factorial = null;
+        console.log(temp(3)); // 6
+
+        /**
+         * 2. this : this对象引用的是函数执行环境对象
+         *      例如，当函数在全局作用域执行是，this 指向就是 window
+         *      也就是说，谁调用函数，那么函数的 this 对象就指向谁
+         *
+         */
+      }
+
+      //   函数的属性和方法
+      {
+        /**
+         * 每个函数都包含 length 和 prototype 属性
+         *      1.  length 属性表示函数希望接受的命名参数的个数
+         *      2.  prototype 是函数的原型，所有的实例方法都保存在 prototype 下
+         *
+         * 每个函数都有两个非继承来的方法： call() 和 apply()
+         * 这两个方法的用途都是在特定的作用域中调用函数，等同于设置函数体内的 this 对象的值
+         *  `   1. apply() : 接受两个参数
+         *                  1. 要运行函数的作用域
+         *                  2. 参数数组，可以是 Array 实例，也可以是 arguments 对象
+         */
+
+        function sum(num1, num2) {
+          return num1 + num2;
+        }
+
+        function callsum(num1, num2) {
+          return sum.apply(this, arguments);
+        }
+        console.log(callsum(1, 20));
+
+        /**
+         * call: call 的使用方法和 apply 相同，不同之处在于 call 需要将参数逐个列出
+         */
+
+        /**
+         * 使用 call 和 apply 来扩充函数的作用域
+         */
+        var color = "red";
+        var o = {
+          color: "blue",
+        };
+        function sayColor() {
+          console.log(this.color);
+        }
+
+        sayColor.call(this);
+        //修改函数内 this 对象指向对象 o
+        sayColor.apply(o);
+
+        /**
+         * 使用 bind()  方法改变函数的 this
+         * 下面的例子中，satColor 调用 bind() 并传入对象 o，创建了 tempSayColor 函数
+         * tempSayColor函数的 this 指向 对象 o，即使在全局最用于调用函数 tempSayColor
+         *
+         */
+
+        var tempSayColor = sayColor.bind(o);
+        tempSayColor();
+      }
+    </script>
+  </body>
+</html>

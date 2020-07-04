@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+    <div id="app">
+        <cpn1 @itemclick="cpnclick"></cpn1>
+    </div>
+    <template id='cpn1'>
+        <div>
+            <button v-for="item in values" @click="itemclick(item)">{{item}}</button>
+        </div>
+    </template>
+    <script>
+        const cpn1 = {
+            template: '#cpn1',
+            data() {
+                return {
+                    values: [1, 2, 3, 3, 4, 4]
+                }
+            },
+            methods: {
+                itemclick(item) {
+                    console.log(item)
+                        /*使用 emit 方法将事件传递给父组件，参数为事件名称，
+                        在父组件调用的子组件中监听子组件传递过来的事件和需要传递的参数*/
+                    this.$emit("itemclick", item)
+                }
+            }
+        }
+        const app = new Vue({
+            el: "#app",
+            data: {},
+            components: {
+                cpn1
+            },
+            methods: {
+                cpnclick(item) {
+                    console.log(item)
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Array常用方法</title>
+</head>
+
+<body>
+    <script>
+        var value = [1, 2, 3, 4, 5, 6, 7]
+        /**
+         * 位置方法 --- indeOf() 和 lastIndexOf()
+         * 这两个方法可接受两个参数： 需要查找的项和（可选的）查找的起点位置
+         * 返回要查找的项在数组中的位置，若没有找到则返回 -1，
+         * 在比较第一个参数和数组元素是，会使用全等操作符，也就是说，要求查找的项必须严格相等
+         * 支持 IE9+
+         * indexOf():
+         *          从数组的开头开始查找
+         * 
+         * lastIndexOf():
+         *          丛数组的末尾向前开始查找
+         */
+
+        var temp = value.indexOf(2, 0);
+        console.log("从前往后查找", temp);
+
+        temp = value.lastIndexOf(2, value.length);
+        console.log("从后往前查找", temp);
+
+
+
+        /**
+         * 迭代方法
+         * ES5 中定义个 5个迭代方法，需要为这些方法传递三个参数
+         *      1.数组项的值
+         *      2.当前项的索引
+         *      3.数组对象本身
+         */
+
+        /**
+         * every():对数组的每一项运行指定的函数，若数组的每一项都返回 true ，则返回 true
+         */
+
+        temp = value.every(function (item, index, array) {
+            return (item > 2)
+        })
+
+        console.log(temp); // false
+
+
+        /**
+         * filter(): 对数组每一项运行指定的函数，返回一个数组，该数组的每一项运行指定函数都返回 true
+         */
+
+        temp = value.filter(function (item, index, array) {
+            return (item > 3)
+        })
+
+        console.log(temp); //[4, 5, 6, 7]
+
+
+        /**
+         * forEach(): 与 for 作用循环相同，没有返回值
+         */
+
+        value.forEach(function (item, index, array) {
+            console.log(item, index)
+        })
+
+
+        /**
+         * map() : 对数组中每一项运行指定函数，返回每一次函数调用结果组成的数组
+         */
+
+        temp = value.map(function (item, index, array) {
+            return item * 2;
+        })
+        console.log(temp); //[2, 4, 6, 8, 10, 12, 14]
+
+
+        /**
+         * some(): 对数组中的每一项运行指定函数，若有一项返回 true 则返回 true
+         */
+
+        temp = value.some(function (item, index, array) {
+            return (item > 6);
+        })
+        console.log(temp); //true
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,27 @@
+<script>
+    // 工厂模式
+    /**
+    * 1.创建一个对象 var o = new Object();
+    * 2.为创建的对象赋予属性和方法 
+    * 3.返回这个对象
+    * 
+    * 工厂模式需要显示的创建一个对象，然后返回这个对象
+    * 工厂模式不需要使用 new 关键字，
+    * 解决了大量创建类似对象的问题，但是无法识别对象的类型（即不知道对象是由那一个工厂函数创建出来的）
+    */
+    function person(name, age) {
+        var o = new Object();
+        o.name = name;
+        o.age = age
+        o.sayname = function() {
+            alert(this.name)
+        }
+
+        return o;
+    }
+
+    var person1 = person('zs', 12)
+    alert(person1.name)
+
+    alert(person1 instanceof person)
+</script>

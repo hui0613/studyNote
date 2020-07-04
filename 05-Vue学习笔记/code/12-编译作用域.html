@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <diV id="app">
+        <!--这里是父级模板，这里只能访问到父级作用域中编译的数据（即使用的数据都是vue实例中的数据）
+            尽管这里使用了子组件，但是访问的数据依旧是vue实例中的数据
+        -->
+        <cpn v-show="isShow"></cpn>
+    </diV>
+
+    <template id="cpn">
+        <!--这里是子组件模板，这里访问的数据都是在子组件中定义的数据-->
+        <h2>子组件</h2>
+    </template>
+    <script src="../../vue.js"></script>
+    <script>
+        // 父级模板里的所有内容都是在父级作用域中编译的；子模板里的所有内容都是在子作用域中编译的。
+        const app = new Vue({
+            el: "#app",
+            data: {
+                message: "message",
+                isShow: true
+            },
+            components: {
+                cpn: {
+                    template: "#cpn",
+                    data: {
+                        isShow: false
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

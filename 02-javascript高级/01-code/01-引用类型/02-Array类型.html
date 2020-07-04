@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Array类型</title>
+</head>
+
+<body>
+    <script>
+        /**
+         * 使用 Array 构造函数创建数组
+         */
+
+        var color1 = new Array();
+
+        //传递一个数值作为参数指定创建的数组的 length 
+        var color2 = new Array(20);
+
+        // 向构造函数中传递需要包含的项
+        var color3 = new Array("green", "red");
+
+        /**
+         * 向构造函数中传递一个参数时，若参数类型为数值类型，则将参数作为数组的长度，若不是数值类型，则将参数作为
+         * 数组的项
+         */
+
+        // 使用数组字面量表示法创建数组
+        var color4 = ["red", "green"];
+
+        /**
+         * 使用数组字面量法创建数组时不要在最后一项后面添加逗号，
+         * 因为这样会产生歧义
+         * 例如以下代码中，会创建一个包含两项或者三项的数组
+         * 
+         * 与创建对对象一样，使用数组字面量创建数组是不会调用 Array 构造函数
+         */
+        var color5 = ["red", "green", ]
+
+        /**
+         * 在读取数组的值时，需要使用 [] 并提供基于 0 的数组索引
+         */
+
+        console.log(color5[1])
+
+        //数组的 length 属性表示数组的项的数量，该属性是可读写的
+
+        console.log(color5.length);
+        color5.length = 6;
+        console.log(color5.length);
+
+
+        /**
+         * 数组检测
+         * 1.使用 instanceof 操作符检测
+         * 2. 使用 isArray() 方法检测
+         */
+
+        /**使用 instanceof 操作符检测
+         * 对于不同的框架或者全局作用于中，存在不同的全局执行环境，
+         * 使用 insttanceof 检测在另一个全局环境中创建的数组是会返回 false
+         * 这是因为不同的全局执行环境对应这不同的 Array 构造函数
+         */
+        if (color5 instanceof Array) {
+            //执行操作
+        }
+
+        //使用 isArray() 方法检测
+
+        if (Array.isArray(color5)) {
+            //执行操作
+        }
+
+        /**
+         * 对于不支持或者没有实现 isArray() 方法的浏览器中检测数组
+         */
+    </script>
+</body>
+
+</html>

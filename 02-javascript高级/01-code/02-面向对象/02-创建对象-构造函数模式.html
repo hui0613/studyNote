@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>构造函数创建对象</title>
+</head>
+<body>
+    <script>
+        /**
+        * 对于原生的构造函数，在运行是自动的出现的运行环境中，
+        * 可以通过自定义构造函数来自定义对象的属性和方法
+        */ 
+
+        // 自定义构造函数，命名时使用大驼峰规则，区别于其他的函数
+        function Person(name,age){
+            this.name = name;
+            this.age = age;
+            this.sayName  = function(){
+                alert(this.name)
+            }
+        }
+
+        // 使用 构造函数创建对象实现需要使用 new 关键字
+
+        /**
+        * 在使用 new 关键字创建对象时，实际上会经历以下步骤
+        * 
+        * 1.创建一个新对象
+        * 2.将构造函数的作用于赋给新对象（因此构造函数中的this指向个这个新对象）
+        * 3.执行构造函数中的代码（为新对象添加属性和方法）
+        * 4.返回这个对象
+        */ 
+
+        var person1 = new Person("zs",12);
+
+        /**
+        * 使用 new 关键字创建的对象都包含一个 constructor 属性，该属性指向 构造函数本身
+        * 使用 constructor 属性可以检测对象类型
+        * 但是检测对象类型更可靠的还是使用 instanceof 操作符
+        */ 
+
+        alert(person1.constructor == Person); //true
+
+        // 使用 instanceof 操作符检测对象类型
+        alert(person1 instanceof Person);
+
+        // 将构造函数当作函数来使用
+        /**
+        * 构造函数作为普通函数使用时，会将所有的属性和方法添加到 window 对象中
+        * 
+        */
+
+        // 构造函数存在的问题
+        /**
+        * 对于构造函数中的方法，在创建两个或多个完全相同的实例，会创建多个 Function 的实例，并且这些 Function 并不相等，这是没有必要的
+        */
+
+        var person2 = new Person("ls",13);
+        alert(person1.sayName == person2.sayName); //false
+    </script>
+</body>
+</html>

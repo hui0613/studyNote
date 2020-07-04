@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>理解对象</title>
+</head>
+<body>
+    <script>
+        /**
+        * ECMAScript 中有两种属性 ： 数据属性和访问器属性
+        * 
+        * 在 JavaScript 中不能之间诶访问
+        * 1.数据属性：包含一个数据值的位置，在这个位置可以读取和写入值
+        *       数据属性共有以下四个特性
+        *           1. [[Configurable]]:表示该属性能否通过 delete 操作符删除属性然后重新定义， 默认值为 true 
+        *           2. [[Enumerable]] : 表示能否通过 for-in 循环返回属性，默认值为 true
+        *           3. [[Writable]] : 表示能否修改该属性的值， 默认为 true
+        *           4. [[Value]] : 包含这个属性的数据值
+        */
+        var person = {
+            name:"zhangsan"
+        }
+
+        // 上面的代码中创建 name 属性， [[value]] 特性被设置成 "zhangsan"
+
+        // 要修改属性默认之值，需要使用 Object.defineProperty() 方法
+
+        Object.defineProperty(person,'name',{
+            writable:false,
+            value:"lisi"
+        })
+
+        // 上面的代码中 将 name 属性的 [[Writable]] 设置为 false，意味着该属性只是可读的，赋值操作会被忽略，在严格模式下，赋值操作或抛出错误
+        console.log(person.name)
+        person.name = "wang"; // 赋值操作被忽略
+        console.log(person.name)
+
+        /**
+        * 在调用 Objet.defineProperty() 方法创建一个属性是，如果不指定，则 configurable、enumerable、
+        * writable 都为 false
+        *
+        * 若将 [[Configurable]] 设置成 false，则无法再修改除 writable 之外的特性，都会导致错误
+        */ 
+
+        Object.defineProperty(person,'name',{
+            configurable: false
+        })
+
+        // 上面的代码执行完成之后，执行下面的代码时会导致错误 （无法读取属性）
+        Object.defineProperty(person,"name",{
+            enumerable:false
+        })
+
+        /** 访问器属性
+        * 访问器属性不包含数据值，包含一对不必须的 getter 和 settet 函数，在读书访问器属性时，调用 getter 函数，在写入 
+        * 访问器属性时，会调用 setter 函数访问器属性拥有以下四个特性
+        *       1.[[Configurable]] : 能否通过 delete 删除属性从而重新定义属性， 默认值为 true
+        *       2. [[Enumbale]]: 能否通过 for-in 循环返回属性， 默认值为 true
+        *       3. [[getter]] : 在读取属性是调用的函数
+        *       4. [[settet]] : 在写入属性时调用的函数
+        */
+    </script>
+</body>
+</html>

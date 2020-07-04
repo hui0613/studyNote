@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var JSONP = function (url, parm, callback) {
+            // console.log(url)
+            /*
+            处理 url ，在传入的 url 中查找 ？ 若没有则添加 ？ 若有则添加 & ，用于拼接 url 中的参数
+            */
+            var queryString = url.indexOf("?") === -1 ? "?" : "&"
+            for (var item in parm) {
+                // 拼接字符串 处理参数
+                queryString += item + "=" + parm[item] + "&"
+            }
+
+            //  随即生成一个浮点数作为回调函数名，去除 . 
+            let random = Math.random().toString().replace(".", "")
+            var callbackName = "myJSONP" + random
+
+            // 向url中添加回调函数
+            queryString += "callback=" + callbackName
+
+            // 构建请求
+            var scriptNode = document.createElement("script")
+            scriptNode.src = url + queryString
+            // console.log(scriptNode)
+            window[callbackName] = function (parm) {
+                callback(parm)
+                // console.log("demo")
+                // document.body.remove(scriptNode)
+            }
+            document.body.appendChild(scriptNode)
+        }
+
+        JSONP("http://localhost:8080", { num: 10 }, data => {
+            console.log(data)
+        })
+    </script>
+
+</body>
+
+</html>
