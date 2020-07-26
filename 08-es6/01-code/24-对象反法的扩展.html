@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>对象方法的扩展</title>
+  </head>
+  <body>
+    <script>
+      /**
+       * 1.  Object.is() 判断两个值是否完全相等
+       *        类似与全等
+       *        Object.is(NaN,Nan)  true
+       *
+       * 2. Object.assign() 对象的合并
+       *        若两个对象有相同的属性，则第二个参数对象的属性会覆盖第一个参数对象的属性
+       *        不相同的属性会进行合并
+       *
+       * 3.  Object.setPrototypeOf() Object.getPrototypeOf()
+       *        对原型对象进行设置和获取
+       */
+
+      console.log(Object.is(NaN, NaN));
+
+      const obj1 = {
+        name: 123,
+        age: 1234,
+        test: "test",
+      };
+
+      const obj2 = {
+        name: 321,
+        age: 321,
+        demo: "demo",
+      };
+
+      console.log(Object.assign(obj1, obj2));
+
+      const demo1 = {
+        name: "zs",
+      };
+      const demo2 = {
+        age: 12,
+      };
+
+      Object.setPrototypeOf(demo1, demo2);
+      /**
+       * Object.setPrototypeOf() 会将第二个参数对象作为第一个参数对象的原型添加到第一个参数对象中
+       */
+
+      console.log(demo1);
+    </script>
+  </body>
+</html>

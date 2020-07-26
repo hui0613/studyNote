@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>async</title>
+  </head>
+  <body>
+    <script>
+      /**
+       * async 函数的返回值为 promise 对象
+       * promise 的结果有 async 函数执行结果决定
+       */
+      //   申明 async 函数
+      async function demo() {
+        // 即使手动设置返回为字符串或者其他数据类型，实际上返回的时 promise 对象
+        //  只要返回值不是 promise 对象，则返回的结果时一个成功的 promise
+        // return "demo";
+        // 抛出错误，返回一个失败的 promise
+        // throw new Error("出错拉");
+        // 返回一个 promise 对象,返回的结果状态有 promise 对象的结果决定
+        return new Promise((resolce, reject) => {
+          reject("出错拉   ");
+        });
+      }
+      console.log(demo(0));
+    </script>
+  </body>
+</html>

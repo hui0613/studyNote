@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>简化对象</title>
+  </head>
+  <body>
+    <script>
+      /**
+       * es6 中允许在花括号中直接写入变量作为对象的属性和方法
+       */
+
+      let name = "zs";
+      let obj = {
+        name,
+        test() {
+          console.log("这件es6中对象方法的简写");
+        },
+      };
+
+      /**
+       * 等同于
+       *
+       * let obj = {
+       *    name:name,
+       *    test:function(){
+       *        console.log();
+       *    }
+       * };
+       *
+       *
+       */
+      console.log(obj);
+    </script>
+  </body>
+</html>

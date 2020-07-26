@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      /**
+       * set 中不存在重复元素，类似与数学中的集合
+       * Set 的实例是一个对象
+       */
+
+      let s = new Set([1, 2, 3, 45, 1, 2]);
+      console.log(s, typeof s); //{1, 2, 3, 45}
+
+      // Set 的大小
+      console.log(s.size());
+
+      // 添加 元素
+      s.add(6);
+
+      //删除元素
+      s.delete(1);
+
+      //判断是否含有某个元素
+      s.has(2);
+
+      // 使用 Set 对数组去重
+      let arr = [1, 2, 3, 4, 1, 2, 3, 4];
+      let result = [...new Set(arr)];
+      console.log(result);
+
+      //利用Set求交集
+      let arr1 = [2, 3, 4, 5, 6, 7];
+
+      //   result = [...new Set(arr)].filter((item) => {
+      //     let s2 = new Set(arr1);
+      //     if (s2.has(item)) {
+      //       return true;
+      //     } else {
+      //       return false;
+      //     }
+      //   });
+
+      //   简化代码
+      result = [...new Set(arr)].filter((item) => new Set(arr1).has(item));
+
+      console.log(result);
+
+      // 并集  先合并数组然后利用Set去重
+      let union = [...new Set([...arr, ...arr1])];
+      console.log(union);
+
+      //差集  利用交集取反
+      let diff = [...new Set(arr)].filter((item) => !new Set(arr).has(arr1));
+      console.log(diff);
+    </script>
+  </body>
+</html>

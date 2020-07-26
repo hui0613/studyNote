@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      /**
+       * Symbol 时一种新的数据类型，表示独一无二的值，是一种类似与字符串的数据类型
+       * 1.Symbol 的值是唯一的，可以用来解决命名冲突的问题
+       * 2.Symbol 的值不能与其他数据进行运算
+       * 3.Symbol 定义的对象不能使用 for..in 循环来遍历，
+       *    但是可以使用 Reflect.ownKeys 类获取所有的键名
+       */
+
+      //    创建 Symbol
+      let s = Symbol();
+      console.log(s, typeof s);
+      let s1 = Symbol("描述字符串");
+      let s2 = Symbol("描述字符串");
+      console.log(s1 === s2); //false
+
+      let s3 = Symbol.for("描述字符串");
+      console.log(s2);
+      let s4 = Symbol.for("描述字符串");
+      console.log(s3 === s4); //true
+
+      //   使用 Symbol 创建对象的属性和方法
+
+      let game = {
+        test: function () {
+          console.log("test");
+        },
+      };
+
+      let methods = {
+        test: Symbol(),
+      };
+
+      game[methods.test] = function () {
+        //   这样创建的方法比较安全，不会与其他方法产生冲突
+        console.log("使用 Symbol 创建的方法");
+      };
+
+      game[methods.test]();
+      console.log(game);
+
+      //   Symbol 的内置值
+    </script>
+  </body>
+</html>

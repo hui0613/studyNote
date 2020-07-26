@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      /**
+       * es6 中允许给函数的参数设置默认值
+       *
+       * 1.具有默认值的参数一般靠后
+       * 2.默认值可以与解构赋值使用
+       */
+
+      function add(a, b, c = 12) {
+        return a + b + c;
+      }
+      console.log(add(1, 2));
+
+      function connect({ a, b, c = 12 }) {
+        console.log(a, b, c);
+      }
+      connect({
+        a: 1,
+        b: 2,
+      });
+    </script>
+  </body>
+</html>

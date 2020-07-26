@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      /**
+       * 迭代器的运行原理
+       *
+       * 1.创建一个指针对象，指向当前数据结构的起始位置
+       * 2.第一次调用对象的 next 方法时，指针会自动指向数据结构的第一个成员
+       * 3.接下来不断的调用 next 方法，指针一直往后移动，直到指向最后一个成员
+       * 4.每次调用 next 方法，方会一个包含 value 和 done（表示是否完成遍历） 的对象
+       */
+      let arr = [1, 2, 3];
+      let iterator = arr[Symbol.iterator]();
+      console.log(iterator);
+
+      console.log(iterator.next());
+
+      //   自定义遍历数据
+
+      let obj = {
+        name: 123,
+        stus: ["12", "23", "43"],
+        [Symbol.iterator]() {
+          //申明索引变量
+          let index = 0;
+          let _this = this;
+          return {
+            next: function () {
+              if (index < _this.stus.length) {
+                const result = { value: _this.stus[index], done: false };
+                index++;
+                return result;
+              } else {
+                return { value: "undefined", done: true };
+              }
+            },
+          };
+        },
+      };
+
+      for (let v of obj) {
+        console.log(v);
+      }
+    </script>
+  </body>
+</html>

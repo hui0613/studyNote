@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      /**
+       * 生成器实际上是一个特殊的函数
+       * 用于异步编程（以往的异步编程通常使用回调函数）
+       */
+
+      //    生成器的申明和调用
+      function* gen() {
+        console.log("hello world");
+      }
+
+      let iterator = gen(); //在这里调用 gen 并不会执行函数
+
+      //   iterator.next(); // hello world
+
+      //   向生成器函数中传递参数
+
+      function* demo(arg) {
+        console.log(arg);
+        let one = yield 111; // 将调用 next 方法时传递的参数作为返回结果
+        console.log(one); //888
+      }
+
+      let iterator1 = demo(666);
+      iterator1.next(); // 第一次调用 next 方法传递的参数不会作为 yield 语句的返回结果
+      iterator1.next(888); //在这里传递的参数会作为函数体中上一个 yield 语句的返回结果，这里传递的为实参
+    </script>
+  </body>
+</html>

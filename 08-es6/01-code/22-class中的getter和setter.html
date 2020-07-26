@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>class中的getter和setter</title>
+  </head>
+  <body>
+    <script>
+      /**
+       *
+       */
+      class Phone {
+        //   读取价格属性时 会调用该方法
+        get price() {
+          console.log("读取价格属性");
+          return "price";
+        }
+        // set 函数必须要有参数
+        set price(price) {
+          console.log("设置价格属性");
+        }
+      }
+
+      let s = new Phone();
+      console.log(s.price);
+      s.price = 1232;
+    </script>
+  </body>
+</html>

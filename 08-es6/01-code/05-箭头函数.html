@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>箭头函数</title>
+  </head>
+  <body>
+    <script>
+      /**
+       * es6 中允许使用箭头 => 来定义函数
+       *
+       * 1.箭头函数中 this 值是静态的，始终指向函数在申明时所在作用域下的 this 值，
+       * 不能使用 call\apply等方法改变
+       *
+       * 2.不能作为构造函数实例化对象
+       *
+       * 3.不能使用 arguments 变量
+       *
+       * 4.箭头函数的简写
+       *       4.1 省略小括号，当形参有且只有一个时
+       *       4.1 省略花括号，当函数体只有一条语句时，此时 return 语句必须省略,此时语句的执行
+       *            结果会作为返回值返回
+       */
+
+      window.name = "123";
+
+      let fn = () => {
+        //   该函数在全局作用域中申明，因此 this 指向window
+        // console.log(arguments); // 抛出错误
+        console.log(this.name);
+      };
+      let obj = {
+        name: "234",
+      };
+      fn.call(obj);
+    </script>
+  </body>
+</html>

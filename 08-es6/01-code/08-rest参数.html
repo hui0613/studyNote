@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>rest参数</title>
+  </head>
+  <body>
+    <script>
+      /**
+       * es6 中可以使用 rest 参数来获取函数的实参，以代替 arguments
+       * rest 参数的形式 为 ...args
+       *
+       * arguments 的值为一个对象
+       *
+       * rest 获取到的参数为数组形式
+       * 若函数具有多个参数，rest 参数必须放在最后,若匹配前面的形参后还有多余的实参，则会复制给 rest 参数
+       * 若实参个数不足，rest 参数为空
+       *
+       */
+
+      function add(a, b, ...args) {
+        console.log(args);
+      }
+
+      add(1); // []
+      add(1, 2, 3, 4); //[3,4]
+    </script>
+  </body>
+</html>

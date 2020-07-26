@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>箭头函数应用实践和应用场景</title>
+    <style>
+      #ad {
+        width: 100px;
+        height: 100px;
+        background-color: green;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="ad"></div>
+    <script>
+      /**
+       * 点击元素 2s 后改变元素的背景颜色
+       */
+
+      let ad = document.getElementById("ad");
+      ad.addEventListener("click", function () {
+        //   在定时器中使用 箭头函数
+        setTimeout(() => {
+          this.style.backgroundColor = "red";
+        }, 2000);
+
+        // 定时器中不使用箭头函数的写法
+
+        // 先保存外部的 this 指向
+        /** 
+        let _this = this;
+        setTimeout(function () {
+          _this.style.backgroundColor = "red";
+        }, timeout);
+        */
+
+        /**
+         * 箭头函数应用场景：与 this 无关的回调（定时器，数组操作方法的回调）
+         * 不使用与 this 有关的回调（事件的回调，对象的方法）
+         */
+      });
+    </script>
+  </body>
+</html>

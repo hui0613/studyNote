@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      /**
+       * 1.申明;
+       * 2.静态成员
+       */
+
+      class Phone {
+        //   使用 static 申明的静态变量和方法属于类而不属于实例对象，实例对象不能调用该属性和方法
+        static name = "手机";
+        // 构造方法  使用 new 关键字创建对象时会自动调用 constructor 构造方法
+        constructor(brand, price) {
+          this.brand = brand;
+          this.price = price;
+        }
+        // 类中定义方法必须使用以下格式
+        call() {
+          console.log("这是方法");
+        }
+      }
+
+      let onePlus = new Phone("1+", 1999);
+
+      console.log(onePlus);
+      onePlus.call();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>解构赋值</title>
+  </head>
+  <body>
+    <script>
+      /**
+       * ES6 允许按照一定的模式从数组或者对象中提取值，对变量进行赋值
+       * 这被成为解构赋值
+       *
+       * 对于解构不成功时会对变量赋值为 undefined
+       * 可以对变量设置默认值，只有在右边成员值为 undefined（使用 === 进行匹配） 时默认值才会生效
+       * let [a,b=123] = [1,undefined];  a=1,b=123;
+       * let [c] = [null];  c=null;
+       */
+
+      // 1.数组的结构赋值
+      let [a, b, c, d] = [1, 2, 3, 4];
+      console.log(a, b, c, d);
+
+      //2.对象的解构赋值
+      const obj = {
+        name: "zhangsan",
+        age: 12,
+        test: function () {
+          console.log("demo");
+        },
+      };
+
+      //   let { name, age, test } = obj;
+      //   console.log(name, age, test);
+
+      // 对象解构赋值时，会优先对应相同变量名的值
+      let { test } = obj;
+      console.log(test); //  function () {console.log("demo");}
+    </script>
+  </body>
+</html>
