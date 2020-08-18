@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app"></div>
+
+  <script>
+    let str = '<div class="box"><div class="test">test</div></div> <div class="demo">demo</div>'
+    let app = document.getElementById('app')
+    append(app,str)
+    function append(parent,text) {
+      if (typeof text === 'string') {
+        var temp = document.createElement('div');
+        temp.innerHTML = text;
+        // 防止元素太多 进行提速
+        var frag = document.createDocumentFragment();
+        while (temp.firstChild) {
+          frag.appendChild(temp.firstChild);
+        }
+        parent.appendChild(frag);
+      } else {
+        parent.appendChild(text);
+      }
+    }
+
+  </script>
+</body>
+
+</html>

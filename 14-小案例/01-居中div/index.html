@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="index.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="margin box" id="margin">利用 margin: 0 auto 实现水平居中</div>
+      <div class="textAlign" id="textAlign">
+        <div class="box">
+          利用 父元素设置 text-align:center; 子元素设置 displat:inline-block
+        </div>
+      </div>
+
+      <div class="absolute box" id="absolute">
+        已知容器宽高为 300px <br />
+        使用绝对定位 position: absolute; top: 0; left: 0; bottom: 0; right: 0;
+        margin: auto;<br /><br />
+        或者 position: absolute；top:50%; left:50%; margin-left: -150px;
+        margin-top:-150px;
+      </div>
+      <div class="transform box" id="transform">
+        未知容器宽高<br />
+        position: absolute; /*相对定位或绝对定位均可*/ width: 500px; height:
+        300px; top: 50%; left: 50%; transform: translate(-50%, -50%);
+      </div>
+
+      <div class="flex" id="flex">
+        <div class="box">
+          利用 lfex 布局<br />
+          align-items: center; /*垂直居中*/<br />
+          justify-content: center; /*水平居中*/
+        </div>
+      </div>
+    </div>
+    <div class="options" id="options">
+      <ul>
+        <li data-type="margin">水平居中1</li>
+        <li data-type="textAlign">水平居中2</li>
+        <li data-type="absolute">水平垂直居中1</li>
+        <li data-type="transform">水平垂直居中2</li>
+        <li data-type="flex">水平垂直居中3</li>
+      </ul>
+    </div>
+    <script>
+      let curType = "margin";
+      let options = document.getElementById("options");
+      options.onclick = function (e) {
+        let ev = e || window.event;
+        let target = ev.target || ev.srcElement;
+        let targetType = target.getAttribute("data-type");
+        document.getElementById(curType).style.display = "none";
+        if (targetType == "flex") {
+          document.getElementById(targetType).style.display = "flex";
+        } else {
+          document.getElementById(targetType).style.display = "block";
+        }
+        curType = targetType;
+      };
+    </script>
+  </body>
+</html>
