@@ -40,6 +40,14 @@
 - 在某范围内查找
   `db.${表名}.find({key:{$lte:values,$gte:values}})`
 
+### 更新数据
+
+`db.${表名}.update({key,value},{$set:{key:newValue})`
+
+### 删除数据
+
+`db.${表名}.remove({key,value})`
+
 ## 删除数据库
 
 ### 首先进入要删除的数据库
@@ -49,3 +57,54 @@
 ### 删除数据库
 
 `db.dropDatabase()`
+
+## 开启数据库权限验证
+
+### 开启验证配置
+
+- 修改 mongodb 配置文件
+
+  `sduo gedit /etc/mongodb.conf`
+
+  ```
+  # Turn on/off security.  Off is currently the default
+  #noauth = true
+  auth = true
+  ```
+
+### 创建超级管理员（对所有的数据库具有读写权限）
+
+- 进入 admin 数据库
+
+  `use admin;`
+
+- 创建用户和设置密码
+
+  ```
+  db.createUser({ user: "root", pwd: "123456", roles: [{ role: "userAdminAnyDatabase", db: "admin" }] })
+  ```
+
+### 为单个数据库创建用户
+
+- 进入 admin 数据库
+
+  `use admin;`
+
+- 使用超级管理员的登录
+
+  `db.auth('root','123456')`
+
+- 进入需要添加用户的数据库
+
+  `use test`
+
+- 创建用户赋予读写权限
+
+  ```
+  db.createUser({ user: "test", pwd: "123456", roles: [{ role: "readWrite",db:"test"}] })
+  ```
+
+### 修改了配置文件需要重启 mongodb 服务
+
+`systemctl restart mongodb.service`
+

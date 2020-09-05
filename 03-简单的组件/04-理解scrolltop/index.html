@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .box {
+        width: 300px;
+        height: 300px;
+        overflow: scroll;
+        background-color: red;
+      }
+      .content {
+        width: 150px;
+        height: 10000px;
+        margin: 0 auto;
+        background-color: blue;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="box" id="box">
+      <div class="content" id="content"></div>
+    </div>
+    <script>
+      var content = document.getElementById("box");
+      content.addEventListener("scroll", function () {
+        console.log(content.scrollTop);
+      });
+    </script>
+  </body>
+</html>

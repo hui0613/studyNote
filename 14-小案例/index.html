@@ -2,34 +2,20 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function demo(res) {
+            console.log(res)
+        }
+    </script>
+    <script
+        src='https://wwwapi.kugou.com/yy/index.php?r=play/getdata&callback=demo&hash=3BD5C05B9F8D082BA3C9425A1A712394&album_id=966846&dfid=0i1h1F3sr8Zb0yWcdB2z9omz&mid=1080f82aa3d7dc92ead23c55193f6ded&platid=4&_=1597904734705'></script>
 </head>
 
 <body>
-  <div id="app"></div>
 
-  <script>
-    let str = '<div class="box"><div class="test">test</div></div> <div class="demo">demo</div>'
-    let app = document.getElementById('app')
-    append(app,str)
-    function append(parent,text) {
-      if (typeof text === 'string') {
-        var temp = document.createElement('div');
-        temp.innerHTML = text;
-        // 防止元素太多 进行提速
-        var frag = document.createDocumentFragment();
-        while (temp.firstChild) {
-          frag.appendChild(temp.firstChild);
-        }
-        parent.appendChild(frag);
-      } else {
-        parent.appendChild(text);
-      }
-    }
-
-  </script>
 </body>
 
 </html>

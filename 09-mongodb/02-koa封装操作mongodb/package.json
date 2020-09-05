@@ -1,0 +1,15 @@
+{
+  "name": "kao-mongodb",
+  "version": "1.0.0",
+  "description": "使用koa封装操作mongodb",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "koa": "^2.13.0",
+    "mongodb": "^3.5.9"
+  }
+}
