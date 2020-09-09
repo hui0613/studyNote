@@ -52,10 +52,67 @@ var Dog(){
 ```javascript
 function test() {
   console.log(this);
-  consol.log("test");
 }
 
 var obj = {};
 var newFun = test.bind(obj);
-newFun();
+newFun(); // {}
+```
+
+## 手动实现 `call` ,`apply` ,`bind`
+
+### 实现 call()
+
+```javascript
+// 实现 call 方法
+Function.prototype.myCall = function (context) {
+  //若没有指定 this，则默认为全局环境
+  if (context === undefined) {
+    context = window === "undefined" ? global : window;
+  }
+
+  const fn = Symbol();
+  context[fn] = this;
+  context[fn](...[...arguments].slice(1));
+  // 函数执行完毕之后要删除该属性
+  delete context[fn];
+};
+```
+
+### 实现 apply()
+
+```javascript
+/**
+ * apply 方法和 call 方法类似，只是在传递参数是不同
+ */
+Function.prototype.myCall = function (context) {
+  //若没有指定 this，则默认为全局环境
+  if (context === undefined) {
+    context = window === "undefined" ? global : window;
+  }
+
+  const fn = Symbol();
+  context[fn] = this;
+  // 与 call 方法的不同之处
+  context[fn](...[...arguments].slice(1));
+  // 函数执行完毕之后要删除该属性
+  delete context[fn];
+};
+```
+
+### 实现 bind()
+
+```javascript
+Function.prototype.myBind = function (context) {
+  if (context === undefined) {
+    context = window === "undefined" ? global : window;
+  }
+  let _this = this,
+    args = [...arguments].slice(1);
+
+  return function () {
+    let newArges = [...arguments];
+    return self.apply(context, args.concat(newArges));
+  };
+};
 ```
