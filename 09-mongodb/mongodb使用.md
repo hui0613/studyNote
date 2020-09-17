@@ -64,7 +64,7 @@
 
 - 修改 mongodb 配置文件
 
-  `sduo gedit /etc/mongodb.conf`
+  `sudo gedit /etc/mongodb.conf`
 
   ```
   # Turn on/off security.  Off is currently the default
@@ -107,4 +107,3 @@
 ### 修改了配置文件需要重启 mongodb 服务
 
 `systemctl restart mongodb.service`
-
