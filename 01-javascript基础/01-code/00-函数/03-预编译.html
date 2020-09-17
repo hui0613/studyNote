@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function test() {
+        return a;
+        var a = 1;
+        function a() {
+          console.log("a");
+        }
+      }
+      console.log(test()); // 打印 a 函数
+
+      /**
+       * 预编译过程
+       * 1.寻找形参和变量申明
+       * 2.实参赋值给形参
+       * 3.寻找函数申明
+       * 4.执行函数
+       *
+       * AO = {
+       *    a : undefined -> functiona(){}
+       * }
+       */
+
+      function dmeo() {
+        var a = 1;
+        function a() {}
+        var a = 2;
+        return a;
+      }
+      console.log(dmeo());
+      /**
+       * AO ={
+       *   a: undefined
+       *        -> function a(){}
+       *
+       *        下面的赋值操作是在函数执行是进行而不是预编译过程中
+       *        -> 1
+       *        -> 2
+       * }
+       */
+    </script>
+  </body>
+</html>
