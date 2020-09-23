@@ -1,19 +1,85 @@
-html{
-    background-color: #EBECF0;
+html,
+body,
+h3,
+input {
+  margin: 0;
+  padding: 0;
+}
+input {
+  border: none;
+  outline: none;
+}
+button {
+  border: none;
+  outline: none;
 }
 
-.box{
-    width: 300px;
-    height: 60px;
-    margin-top:100px;
-    margin-left: 100px;
-    box-shadow: inset 4px 4px 8px #BABECC,
-    inset -4px -4px 8px #ffffff;
-    border-radius: 150px;
-    transition: all 0.2s ease-in-out;
-    
+.container {
+  height: 100vh;
+  /* border: 1px solid red; */
+  overflow: hidden;
+  /* background-color: #ebecf0; */
 }
-.box:hover{
-    box-shadow: inset 1px 1px 2px #BABECC,
-    inset -1px -1px 2px #ffffff;
+
+.form_grop {
+  width: 30vw;
+  height: 30vw;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  background-color: #ebecf0b4;
+  border-radius: 20px;
+  /* border: 1px solid red; */
+}
+
+.form_grop h3 {
+  height: 60px;
+  line-height: 60px;
+  text-align: center;
+  font-size: 30px;
+  color: #babecc;
+  font-weight: 500;
+  text-shadow: 2px 2px 2px rgb(235, 232, 232);
+  /* border: 1px solid red; */
+}
+.form_grop .form_input {
+  width: 80%;
+  margin: 0 auto;
+  margin-top: 30px;
+  /* border: 1px solid red; */
+}
+
+.form_grop .form_input input {
+  width: 100%;
+  padding: 16px;
+  box-sizing: border-box;
+  /* padding-left: 10px; */
+  border-radius: 300px;
+  /* 设置向内阴影，看起来像是内容被压下 */
+  box-shadow: inset 5px 5px 9px #babecc;
+  transition: all 0.2s ease;
+}
+
+.form_grop .form_input input:focus {
+  box-shadow: inset 1px 1px 2px #babecc;
+}
+
+.form_grop .form_input button {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 16px;
+  border-radius: 300px;
+  background: #fff;
+  cursor: pointer;
+  box-shadow: 6px 6px 12px #babecc;
+  transition: all 1s ease;
+}
+
+/* .form_grop .form_input button:hover {
+  box-shadow: 4px 4px 8px #babecc;
+} */
+
+.form_grop .form_input button:active {
+  box-shadow: inset 3px 3px 6px #babecc, inset -3px -3px 6px #babecc;
 }

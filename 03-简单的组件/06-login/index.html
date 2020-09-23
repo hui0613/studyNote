@@ -1,17 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="./index.css">
-</head>
+    <link rel="stylesheet" href="./index.css" />
+    <script src="./index.js"></script>
+  </head>
 
-<body>
-    <div>
-        <div class="box"></div>
+  <body>
+    <div class="container">
+      <form class="form_grop">
+        <h3>Sign In</h3>
+        <div class="form_input">
+          <input type="text" placeholder="account" required />
+        </div>
+        <div class="form_input">
+          <input type="password" placeholder="password" required />
+        </div>
+        <div class="form_input">
+          <button onclick="Login();return false">Sign In</button>
+        </div>
+      </form>
     </div>
-</body>
-
+  </body>
 </html>
