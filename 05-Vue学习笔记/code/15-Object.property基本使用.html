@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let obj = {
+        name: 'zs',
+      };
+      Object.defineProperty(obj, 'age', {
+        // configurable 键值为 true 时，该属性可删除，该属性的描述符可被修改，默认为 false
+        // configurable: true,
+        // // enumerable 键值为 true 时，该属性可被枚举，默认为 false
+        // enumerable: true,
+        // // value 属性的值为对象对应属性的值
+        // value: 12,
+        // //writable 键值为 true 时，该属性可写，否则不可使用 复制运算符改变，默认为 false
+        // writable: true,
+
+        /**
+         *  在描述符中，get() set()不能和 value writable 共存
+         */
+
+        // 访问该属性时，会自动调用 get 方法
+        get() {
+          return age;
+        },
+
+        // 使用 复制运算符时会调用 set 方法
+        set(val) {
+          age = val;
+        },
+      });
+      obj.age = 10;
+      console.log(obj.age);
+    </script>
+
+    <script>
+      // 模拟 VM 对象
+      let person = {
+        name: 'zs',
+        age: 12,
+      };
+
+      const vm = {};
+
+      // 遍历对象 obj 的属性
+      for (let key in person) {
+        if (obj.hasOwnProperty(key)) {
+          Object.defineProperty(vm, key, {
+            get() {
+              return person[key];
+            },
+            set(val) {
+              person[key] = val;
+            },
+          });
+        }
+      }
+
+      console.log(vm);
+    </script>
+  </body>
+</html>
