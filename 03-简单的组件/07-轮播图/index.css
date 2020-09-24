@@ -1,0 +1,30 @@
+ul,
+body {
+  margin: 0;
+  padding: 0;
+}
+li {
+  list-style: none;
+}
+
+.out-box {
+  width: 300px;
+  height: 200px;
+  overflow: hidden;
+  border: 1px solid red;
+}
+ul {
+  display: block;
+  width: 4800px;
+  height: auto;
+}
+
+li {
+  display: block;
+  width: 300px;
+  height: 200px;
+  float: left;
+}
+img {
+  width: 100%;
+}
