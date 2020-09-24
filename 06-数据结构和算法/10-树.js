@@ -111,6 +111,7 @@ class BinarySearchTree {
     return current;
   }
 
+  // 查询特定的节点
   search(key) {
     this.searchNode(this.root, key);
   }
@@ -125,4 +126,89 @@ class BinarySearchTree {
       return true;
     }
   }
+
+  // 删除节点
+  remove(key) {
+    this.removeNode(this.root, key);
+  }
+  removeNode(node, key) {
+    if (node == null) {
+      return null;
+    }
+
+    if (this.compare(key, node) < 0) {
+      node.left = this.removeNode(node, key);
+      return node;
+    } else if (this.compare(key, node) > 0) {
+      node.right = this.removeNode(node, key);
+      return node;
+    } else {
+      // 叶子节点
+      if (node.left == null && node.right == null) {
+        node = null;
+        return node;
+      } else if (node.left == null) {
+        // 只有右节点
+        node = node.right;
+        return node;
+      } else if (node.right == null) {
+        // 只有左节点
+        node = node.left;
+        return node;
+      }
+      /**  处理有两个子结点的节点
+       *
+       * 将需要删除的节点的值替换成右子树中最小的节点值，然后删除右子树中最小值的节点
+       */
+      const aux = this.minNode(node.right);
+      node.key = aux.key;
+      node.right = this.removeNode(node.right, aux.key);
+      return node;
+    }
+  }
+}
+
+/************************ */
+
+// AVL  树
+class AVLTree extends BinarySearchTree {
+  constructor() {
+    super();
+    this.root = null;
+    const BalanceFactor = {
+      UNBALANCED_RIGHT: 1,
+      SLIGHTLY_UNBALANCED_RIGHT: 2,
+      BALANCED: 3,
+      SLIGHTLY_UNBALANCED_LEFT: 4,
+      UNBALANCED_LEFT: 5,
+    };
+  }
+
+  // 计算节点的高度
+  //叶子节点的高度为 0
+  getHeight(node) {
+    if (node === null) {
+      return -1;
+    }
+    return Math.max(this.getHeight(node.left, this.getHeight(node.right)) + 1);
+  }
+
+  // 计算节点的平衡因子
+  getBalanceFactor(node) {
+    let dsitance = this.getHeight(node.left) - this.getHeight(node.right);
+    switch (dsitance) {
+      case -2:
+        return this.BalanceFactor.UNBALANCED_RIGHT;
+      case -1:
+        return this.BalanceFactor.SLIGHTLY_UNBALANCED_RIGHT;
+      case 1:
+        return this.BalanceFactor.SLIGHTLY_UNBALANCED_LEFT;
+      case 2:
+        return this.BalanceFactor.UNBALANCED_LEFT;
+      default:
+        return this.BalanceFactor.BALANCED;
+    }
+  }
+
+  // 重写 inster 方法
 }
