@@ -209,6 +209,31 @@ class AVLTree extends BinarySearchTree {
         return this.BalanceFactor.BALANCED;
     }
   }
+  // rotationLL 向右的单旋转
+  rotationLL(node) {
+    let temp = node.left;
+    node.left = temp.left;
+    temp.right = node;
+    return temp;
+  }
 
-  // 重写 inster 方法
+  // RR 向左单向旋转
+  rotationRR(node) {
+    let temp = node.right;
+    node.right = temp.right;
+    temp.left = node;
+    return temp;
+  }
+
+  //  LR 向右的双旋转
+  rotationLR(node) {
+    node.left = this.rotationRR(node.left);
+    return this.rotationLL(node);
+  }
+
+  //RL 向左的双旋转 -- 右侧节点高度大于左侧节点
+  rotationRL(node) {
+    node.right = this.rotationLL(node.right);
+    return this.rotationRR(node);
+  }
 }
