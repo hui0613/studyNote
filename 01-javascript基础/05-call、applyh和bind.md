@@ -8,7 +8,7 @@
 
 ```javascript
 function show() {
-  console.log("show");
+  console.log('show');
   console.log(arguments);
 }
 var obj = {};
@@ -68,7 +68,7 @@ newFun(); // {}
 Function.prototype.myCall = function (context) {
   //若没有指定 this，则默认为全局环境
   if (context === undefined) {
-    context = window === "undefined" ? global : window;
+    context = window === 'undefined' ? global : window;
   }
 
   const fn = Symbol();
@@ -88,13 +88,13 @@ Function.prototype.myCall = function (context) {
 Function.prototype.myCall = function (context) {
   //若没有指定 this，则默认为全局环境
   if (context === undefined) {
-    context = window === "undefined" ? global : window;
+    context = window === 'undefined' ? global : window;
   }
 
   const fn = Symbol();
   context[fn] = this;
   // 与 call 方法的不同之处
-  context[fn](...[...arguments].slice(1));
+  context[fn]([...[...arguments].slice(1)]);
   // 函数执行完毕之后要删除该属性
   delete context[fn];
 };
@@ -105,7 +105,7 @@ Function.prototype.myCall = function (context) {
 ```javascript
 Function.prototype.myBind = function (context) {
   if (context === undefined) {
-    context = window === "undefined" ? global : window;
+    context = window === 'undefined' ? global : window;
   }
   let _this = this,
     args = [...arguments].slice(1);

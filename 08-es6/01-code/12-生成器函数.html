@@ -14,7 +14,7 @@
 
       //    生成器的申明和调用
       function* gen() {
-        console.log("hello world");
+        console.log('hello world');
       }
 
       let iterator = gen(); //在这里调用 gen 并不会执行函数
@@ -25,12 +25,12 @@
 
       function* demo(arg) {
         console.log(arg);
-        let one = yield 111; // 将调用 next 方法时传递的参数作为返回结果
-        console.log(one); //888
+        yield arg; // 将调用 next 方法时传递的参数作为返回结果
+        // console.log(one); //888
       }
 
       let iterator1 = demo(666);
-      iterator1.next(); // 第一次调用 next 方法传递的参数不会作为 yield 语句的返回结果
+      console.log(iterator1.next().value); // 第一次调用 next 方法传递的参数不会作为 yield 语句的返回结果
       iterator1.next(888); //在这里传递的参数会作为函数体中上一个 yield 语句的返回结果，这里传递的为实参
     </script>
   </body>
